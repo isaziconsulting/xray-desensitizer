@@ -10,34 +10,21 @@ The x-ray desensitization tool was developed as a means to increase the inflow o
 
 ## Requirements
 
-The code base was developed in conjunction with a [Docker container]() in order to avoid dependecy problems. If you would prefer to not use the Docker container the following are required:
+The code base was developed in conjunction with a [Docker container](https://cloud.docker.com/swarm/isazi/repository/docker/isazi/xray-desensitizer/general) in order to avoid dependecy problems. If you would prefer to not use the Docker container the following are required:
 
 * [Tesseract 4.0 (with LSTM)+](https://github.com/tesseract-ocr/tesseract/wiki/4.0-with-LSTM)
-
 * OpenCV 3.2.0+
-
 * Python 3.5.2+
-
 * Python libraries
-
     * numpy
-
     * pandas
-
     * Pillow
-
     * progressbar33
-
     * pytesseract
-
     * python-gflags
-
     * python-Levenshtein
-
     * scikit-image
-
     * scipy
-
     * python-opencv
 
 -----------------
