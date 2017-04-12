@@ -42,13 +42,9 @@ The Docker container has been built to clone the repository and execute the code
 `clean-xrays.py` functions as the API, it has the following parameters.
 
 * --inpath: path to input data folder.
-
 * --outpath: path to output data folder.
-
 * --clean: type of image processing to perform.
-
     * [default] inpaint: fill in the image where the text was, it will appear as if the text never existed.
-
     * mask: mask off where the text was, this will appear as black blocks.
 
 -----------------
