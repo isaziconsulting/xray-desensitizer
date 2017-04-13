@@ -1,1 +1,7 @@
 *.pyc
+
+assets
+script
+_layouts
+_sass
+_site
