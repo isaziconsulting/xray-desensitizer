@@ -24,7 +24,7 @@ github_username:  isaziconsulting
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-architect
+theme: minima # jekyll-theme-architect
 gems:
   - jekyll-feed
 exclude:
