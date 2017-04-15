@@ -8,14 +8,39 @@ The raw data that we were receiving would be an x-ray arbitrarily placed on a bl
 
 *NOTE: The image below was obtained from the [Montgomery County chest x-ray set](http://archive.nlm.nih.gov/repos/chestImages.php) and fake text was imposed onto the image*
 
-<center><img src="data/sensitive.jpg" alt="X-Ray containing sensitive information" style="width: 650px;"/></center>
+<center>
+    <img src="data/sensitive.jpg" alt="X-Ray containing sensitive information" style="width: 550px;"/>
+    <figcaption style="font-size: 9pt">Fig 1. - Raw x-ray sample</figcaption>
+</center>
 
 # The Desensitization Tool
 
-The desensitization tool had two primary functions, firstly to remove all sensitive patient information and secondly to OCR this information to obtain a unique hash of the patient's name as well as other metadata.
+The desensitization tool had two primary functions, firstly to remove all sensitive patient information and secondly to OCR this information to obtain a unique hash of the patient's name as well as other metadata. The pipeline is summarized below.
 
-## Removing sensitive information
+<center>
+    <img src="data/xray-workflow.png" alt="desensitization pipeline" style="width: 300px;"/>
+    <figcaption style="font-size: 9pt">Fig 2. - Desensitization tool pipeline</figcaption>
+</center>
 
-Localization of the text had to be 100% accurate in order to make the tool feasible. To achieve this we obtained the RGB vector for the yellow colour of the text and took the dot product of each pixel in the image with this vector in order to obtain a 'degree of yellowness' for each pixel. When plotting a histogram of the output it was clear which values corresponded to the image and which corresponded to the text. Thresholding these outputs produced the following result. An interesting thing to note is that this method was suitable for determining all colour from gray as it was able to detect the red text as well. 
+## Text Localization
 
-<center><img src="data/proj_mask.png" alt="Mask after RGB projection" style="width: 650px;"/></center>
+Localization of the text had to be 100% accurate in order to make the tool feasible. To achieve this we obtained the RGB vector for the yellow colour of the text and took the dot product of each pixel in the image with this vector in order to obtain a 'degree of yellowness' for each pixel. When plotting a histogram of the output it was clear which values corresponded to the image and which corresponded to the text. Thresholding these outputs produced the following result. An interesting thing to note is that this method is capable of differentiating all colour from gray which is evident by it being able to identify the red text as well.
+
+<center>
+    <img src="data/proj_mask.png" alt="Mask after RGB projection" style="width: 550px;"/>
+    <figcaption style="font-size: 9pt">Fig 3. - Text localization mask</figcaption>
+</center>
+
+## Text Removal
+
+Once the text has been localized there are two possible options for removing it: image interpolation or masking. Image interpolation, or inpainting, is a magical tool in image processing where the image appears as if the text never existed, whereas masking is simply blanking out the image where the text used to appear. The choice between the two is primarily based on how you believe the artifacts introduced by either method will affect your model's ability to learn. The last part of the text removal phase is to crop only the x-ray from the background. Check out the results below!
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;"><img src="data/final_mask.png" style="width: 100%">Fig 4a. - Inpainting</p>
+<p style="float: right; font-size: 9pt; text-align: center; width: 48%; margin-right: 1%; margin-bottom: 0.5em;"><img src="data/final_inpainting.png" style="width: 100%">Fig 4b. - Masking</p>
+<p style="clear: both;"/>
+
+## Text OCR
+
+Depending on your model it may be desired to get additional metadata in conjunction with the x-ray. From the information available on the x-ray it is possible to get the patient's name, date of birth, sex as well as the date that the x-ray was taken. Obviously the patient's name and date of birth is classified as sensitive information, so we decided to combine the two into a single string and take the one-way SHA-256 hash of it. This means that each patient would be identified by a unique combination of letters and numbers which cannot be linked back to their name and date of birth.
+
+We decided to use [Tesseract OCR (4.0 with LSTM)](https://github.com/tesseract-ocr/tesseract/wiki/4.0-with-LSTM) to assist us with this part of the tool. Even though OCR technology has come a long way recently it still makes mistake, especially on messy data. In order to overcome these errors we integrated the use of approximate median strings into the system. 
