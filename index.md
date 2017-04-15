@@ -43,4 +43,54 @@ Once the text has been localized there are two possible options for removing it:
 
 Depending on your model it may be desired to get additional metadata in conjunction with the x-ray. From the information available on the x-ray it is possible to get the patient's name, date of birth, sex as well as the date that the x-ray was taken. Obviously the patient's name and date of birth is classified as sensitive information, so we decided to combine the two into a single string and take the one-way SHA-256 hash of it. This means that each patient would be identified by a unique combination of letters and numbers which cannot be linked back to their name and date of birth.
 
-We decided to use [Tesseract OCR (4.0 with LSTM)](https://github.com/tesseract-ocr/tesseract/wiki/4.0-with-LSTM) to assist us with this aspect of the tool. Even though OCR technology has come a long way it still makes mistakes, especially on messy data. In order to overcome these errors we integrated the use of approximate median strings into the system. By this I mean we performed different morphological operations on the text of the image in order to obtain multiple results from the OCR. String median then takes all the different outputs obtained for a single image and determines the most likely set of text for that image.
+We decided to use [Tesseract OCR (4.0 with LSTM)](https://github.com/tesseract-ocr/tesseract/wiki/4.0-with-LSTM) to assist us with this aspect of the tool. Even though OCR technology has come a long way it still makes mistakes, especially on messy data. In order to overcome these errors we integrated the use of approximate median strings into the system. By this I mean we performed different morphological operations on the text in the image in order to obtain multiple results from the OCR. String median then takes all the different outputs obtained for a single image and determines the most likely set of text for that image. An example of the resulting images and corresponding outputs can be seen below.
+
+<center>
+    <img src="data/ocr.gif" alt="Mask after RGB projection" style="width: 550px;"/>
+    <figcaption style="font-size: 9pt">Fig 5. - Images resulting from different morphological operations</figcaption>
+</center>
+
+<br>
+
+<table align="center" style="width:75%;font-size: 11pt">
+<caption style="font-size: 9pt">Tab 1. - Example OCR outputs for string median with errors highlighted</caption>
+  <tr>
+    <th></th>
+    <th><p><b>Name</b></p></th>
+    <th><p><b>DOB</b></p></th> 
+    <th><p><b>X-Ray Date</b></p></th>
+    <th><p><b>Sex</b></p></th>
+  </tr>
+  <tr>
+    <td><p><b>Image 1</b></p></td>
+    <td><p>JOHN DOE</p></td>
+    <td><p>01 MAY 2017</p></td>
+    <td><p>TUE 07 JUN 2017</p></td>
+    <td><p>M</p></td>
+  </tr>
+  <tr>
+    <td><p><b>Image 2</b></p></td>
+    <td><p><span style="background-color:#ff8080">E</span>JOHN DOE</p></td> 
+    <td><p>0<span style="background-color:#ff8080">7</span> MAY 2017</p></td> 
+    <td><p>TU<span style="background-color:#ff8080">F</span> 0<span style="background-color:#ff8080">1</span> JUN 2017</p></td> 
+    <td><p>M</p></td>
+  </tr>
+  <tr>
+    <td><p><b>Image 3</b></p></td>
+    <td><p>JOHN <span style="background-color:#ff8080">B</span>OE</p></td>
+    <td><p>01 <span style="background-color:#ff8080">H</span>AY 2017</p></td>
+    <td><p>TUE 07 JUN 2017</p></td>
+    <td><p> <span style="background-color:#ff8080">H</span></p></td>
+  </tr>
+  <tr>
+    <td><p><b>Final</b></p></td>
+    <td><p>JOHN DOE</p></td>
+    <td><p>01 MAY 2017</p></td>
+    <td><p>TUE 07 JUN 2017</p></td>
+    <td><p>M</p></td>
+  </tr>
+</table>
+
+# Closing Comments
+
+The desensitization tool was built as a quick hack to try and streamline our data acquisition process, but actually turned out to be a handy little tool. The best part about it? We decided to open source it incase anyone out there was having a similar problem to us. The code can be found on our [Github](https://github.com/isaziconsulting/xray-desensitizer) account. We also decided to build a [Docker](https://cloud.docker.com/swarm/isazi/repository/docker/isazi/xray-desensitizer/general) container with all the OpenCV, Tesseract and Python dependencies installed so that the tool can just be used in a plug and play kind of fashion. Enjoy! 
