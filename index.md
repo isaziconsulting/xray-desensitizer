@@ -1,10 +1,3 @@
----
-layout: home
-title:  "X-Ray Desensitization Tool"
-date:   2017-04-18 12:00:00 +0200
-categories: open source
----
-
 Anyone who has ever attempted to apply data science in the medical industry will understand the amount of red tape that one needs to go through in order to obtain data. Although understandable, this can really slow down the progression of a project, especially when large quantities of data are required.
 
 We recently encountered this problem when trying to apply deep learning to x-ray images. Freely available datasets are few and far between, which meant we needed to gather data directly from local hospitals. Our first attempt at this took about three weeks for us to get a small subset back. This delay was primarily due to the fact that the x-rays needed to be completely anonymized before they could be handed over to us. As these kinds of delays are obviously impractical we decided to develop a desensitization tool that could be deployed to the hospital so that we could streamline this process.
