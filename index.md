@@ -94,3 +94,25 @@ We used [Tesseract OCR (4.0 with LSTM)](https://github.com/tesseract-ocr/tessera
 # Closing Comments
 
 The desensitization tool was built as a quick hack to try and streamline our data acquisition process, but actually turned out to be a handy little tool. Even though it is a very specific tool we have decided to open source it incase anyone out there was having similar problems to what we were. The code can be found on our [Github](https://github.com/isaziconsulting/xray-desensitizer) page. We also decided to build a [Docker](https://cloud.docker.com/swarm/isazi/repository/docker/isazi/xray-desensitizer/general) container with all the OpenCV, Tesseract and Python dependencies installed so that the tool can just be used in a plug and play kind of fashion. Enjoy! 
+
+# Follow Us
+
+<!-- display the social media buttons in your README -->
+[![alt text][1.1]][1]
+[![alt text][2.1]][2]
+[![alt text][3.1]][3]
+
+<!-- links to social media icons -->
+<!-- no need to change these -->
+
+<!-- icons with padding -->
+[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
+[2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
+[3.1]: http://i.imgur.com/0o48UoR.png (github icon with padding)
+
+<!-- links to your social media accounts -->
+<!-- update these accordingly -->
+
+[1]: https://twitter.com/isaziconsulting
+[2]: https://www.facebook.com/Isazi-Consulting-240193656434498/
+[3]: https://github.com/isaziconsulting
