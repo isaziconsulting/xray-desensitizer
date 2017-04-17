@@ -73,8 +73,8 @@ def hide_names_mask(mask):
         mask: Masked image after performing a dilation on the mask.
     '''
     # expand the mask so it completely hides the names
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    return cv2.dilate(mask, kernel, iterations=2)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
+    return cv2.dilate(mask, kernel, iterations=3)
 
 def get_extracted_img(no_text):
     '''Crops only the x-ray from the image.
