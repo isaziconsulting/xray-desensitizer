@@ -18,7 +18,7 @@ The raw data that we were receiving would be an x-ray arbitrarily placed on a bl
 The desensitization tool has two primary functions, firstly to remove all sensitive patient information and secondly to OCR this information to obtain additional metadata about the patient. The pipeline is summarized below.
 
 <center>
-    <img src="data/xray-workflow.png" alt="desensitization pipeline" style="width: 300px;"/>
+    <img src="data/xray-workflow.png" alt="desensitization pipeline" style="width: 700px;"/>
     <figcaption style="font-size: 9pt">Fig 2. - Desensitization tool pipeline</figcaption>
 </center>
 
@@ -93,7 +93,7 @@ We used [Tesseract OCR (4.0 with LSTM)](https://github.com/tesseract-ocr/tessera
 
 # Closing Comments
 
-The desensitization tool was built as a quick hack to try and streamline our data acquisition process, but actually turned out to be a handy little tool. Even though it is a very specific tool we have decided to open source it incase anyone out there was having similar problems to what we were. The code can be found on our [Github](https://github.com/isaziconsulting/xray-desensitizer) page. We also decided to build a [Docker](https://cloud.docker.com/swarm/isazi/repository/docker/isazi/xray-desensitizer/general) container with all the OpenCV, Tesseract and Python dependencies installed so that the tool can just be used in a plug and play kind of fashion. Enjoy! 
+The desensitization tool was built as a quick solution to try and streamline our data acquisition process. We have chosen to open source this tool because it helps make medical data more accessible to scientists who want to solve problems with it, and that is in line with our principles as a company. The code can be found on our [Github](https://github.com/isaziconsulting/xray-desensitizer) page. We also decided to build a [Docker](https://cloud.docker.com/swarm/isazi/repository/docker/isazi/xray-desensitizer/general) container with all the OpenCV, Tesseract and Python dependencies installed so that the tool can just be used in a plug-and-play kind of fashion. Enjoy! 
 
 # Follow Us
 
