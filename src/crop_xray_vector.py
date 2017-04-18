@@ -73,8 +73,8 @@ def hide_names_mask(mask):
         mask: Masked image after performing a dilation on the mask.
     '''
     # expand the mask so it completely hides the names
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    return cv2.dilate(mask, kernel, iterations=2)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
+    return cv2.dilate(mask, kernel, iterations=3)
 
 def get_extracted_img(no_text):
     '''Crops only the x-ray from the image.
@@ -124,11 +124,11 @@ def run_system(img_name, proc_type='inpaint'):
         no_text = cv2.inpaint(img, all_images[0], 3, cv2.INPAINT_NS)
     elif proc_type == 'mask':
         all_images[0] = hide_names_mask(all_images[0])
-        all_images[0] = (255 - all_images[0])/255
-        no_text = img
-        no_text[:, :, 0] = no_text[:, :, 0] * all_images[0]
-        no_text[:, :, 1] = no_text[:, :, 1] * all_images[0]
-        no_text[:, :, 2] = no_text[:, :, 2] * all_images[0]
+        all_images[0] = np.array((255 - all_images[0])/255, np.uint8)
+        no_text = img.copy()
+        no_text[:, :, 0] = np.array(no_text[:, :, 0] * all_images[0], np.uint8)
+        no_text[:, :, 1] = np.array(no_text[:, :, 1] * all_images[0], np.uint8)
+        no_text[:, :, 2] = np.array(no_text[:, :, 2] * all_images[0], np.uint8)
     # get biggest blob
     new_image = get_extracted_img(no_text)
     yellow_img = get_only_text(all_images[1], img)
