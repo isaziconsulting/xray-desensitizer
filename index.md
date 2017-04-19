@@ -5,6 +5,7 @@ table{
     border:2px solid #fafafa;
     width:200px;
     font-style: italic;
+    font-size: 15px;
 }
 
 th{
@@ -14,6 +15,12 @@ th{
 td{
     border:1px solid #fafafa;
 }
+</style>
+
+<style>
+body {
+  font-size: 17px;
+  }
 </style>
 
 <table align="right">
