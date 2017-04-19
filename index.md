@@ -1,3 +1,36 @@
+<style>
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border:2px solid #fafafa;
+    width:200px;
+    font-style: italic;
+}
+
+th{
+    border:2px solid #fafafa;
+}
+
+td{
+    border:1px solid #fafafa;
+}
+</style>
+
+<table align="right">
+  <tr>
+    <td><b>Author:</b></td>
+    <td>Devin Taylor</td>
+  </tr>
+  <!--<tr>
+    <td></td>
+    <td>Jason Perlow</td>
+  </tr>-->
+</table>
+
+<br />
+
+----------
+
 Anyone who has ever attempted to apply data science in the medical industry will understand the amount of red tape that one needs to go through in order to obtain data. Although understandable, this can really slow down the progression of a project, especially when large quantities of data are required.
 
 We recently encountered this problem when trying to apply deep learning to x-ray images. Freely available datasets are few and far between, which meant we needed to gather data directly from local hospitals. Our first attempt at this took about three weeks for us to get a small subset back. This delay was primarily due to the fact that the x-rays needed to be completely anonymized before they could be handed over to us. As these kinds of delays are obviously impractical we decided to develop a desensitization tool that could be deployed to the hospital so that we could streamline this process.
