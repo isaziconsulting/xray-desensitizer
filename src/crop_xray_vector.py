@@ -2,6 +2,8 @@ import numpy as np
 from skimage import io
 from skimage.color import rgb2grey
 import cv2
+# import matplotlib.pyplot as plt
+# import pylab
 
 # the RBG vector that we are testing against
 #######################################################################
@@ -44,6 +46,11 @@ def get_mask(img):
         dilated_ocr: Result after performing dilation on the closing_ocr image.
     '''
     mask = get_projection_mask_matrix(img)
+#     plt.hist(mask.flatten(), bins=256) #, range=(0.0, 1.0), fc='k', ec='k')
+#     plt.ylabel('Number of pixels')
+#     plt.xlabel('Pixel intensity values')
+# #    plt.ylabel('Histogram of number of pixels in x-ray at different intensity values')
+#     pylab.savefig('hist.png')
     closing_ocr = mask.copy()
     # 245-250 is where all the gray sits
     mask[np.where(np.logical_and(mask > 245, mask < 250))] = 0
