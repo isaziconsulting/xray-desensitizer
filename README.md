@@ -4,7 +4,7 @@
 
 -----------------
 
-The x-ray desensitization tool was developed as a means to increase the inflow of x-ray data from hospitals without breaching patient confidentiality. For more information please refer to our [blog post]().
+The x-ray desensitization tool was developed as a means to increase the inflow of x-ray data from hospitals without breaching patient confidentiality. For more information please refer to our [blog post](https://isaziconsulting.github.io/xray-desensitizer/).
 
 -----------------
 
